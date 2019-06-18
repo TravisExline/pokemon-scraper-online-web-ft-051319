@@ -22,6 +22,6 @@ class Pokemon
       SELECT * FROM pokemon
       WHERE id = ?
       LIMIT 1
-      SQL
-    end
+    SQL
+  end
 end
