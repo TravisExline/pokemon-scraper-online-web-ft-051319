@@ -14,11 +14,9 @@ class Pokemon
     @id = db.execute("SELECT last_insert_rowid() FROM pokemon")[0][0]
   end
 
-  def self.find(id)
-    sql = <<-SQL
-      SELECT * FROM pokemon
-      WHERE id = ?
-      LIMIT 1
-    SQL
+  def self.find(id, db)
+    db.execute("SELECT * FROM pokemon WHERE id=?", id).map do |row|
+      Pokemon.new(id: row[0], name: row[1], type: row[2], hp: row[3], db: db)
+    end.first
   end
 end
